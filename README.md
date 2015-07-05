@@ -13,4 +13,5 @@ The laziest way to solve sudoku puzzles.
 
 ## Bugs
 
-- It shows, at least, one solution. But not every one.
+- It shows, at least, one solution. But not every one
+- Runtime errors when providing invalid sudokus
