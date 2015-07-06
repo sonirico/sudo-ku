@@ -8,25 +8,22 @@ public class SudokuMaker {
 
 	public static void main (String args[]){
 		int [][] s = new int [][]{
-				{1, 0, 0, 	0, 0, 0,	0, 0, 0},
-				{0, 0, 0, 	0, 0, 0,	0, 0, 0},
-				{0, 0, 0, 	0, 0, 0,	0, 0, 0},
+				{1, 0, 0,   0, 0, 0,    0, 0, 0},
+				{0, 0, 0,   0, 1, 0,    0, 0, 0},
+				{0, 0, 0, 	0, 0, 0,	0, 0, 1},
 				
-				{0, 0, 0, 	0, 0, 0,	0, 0, 0},
-				{0, 0, 0, 	0, 0, 0,	0, 0, 0},
-				{0, 0, 0, 	0, 0, 0,	0, 0, 0},
+				{0, 1, 0,   0, 0, 0,    0, 0, 0},
+				{0, 0, 0,   0, 0, 1,    0, 0, 0},
+				{0, 0, 0,   0, 0, 0,    1, 0, 0},
 				
-				{0, 0, 0, 	0, 0, 0,	0, 0, 0},
-				{0, 0, 0, 	0, 0, 0,	0, 0, 0},
-				{0, 0, 0, 	0, 0, 0,	0, 0, 0}
+				{0, 0, 1,   0, 0, 0,    0, 0, 0},
+				{0, 0, 0,   1, 0, 0,    0, 0, 0},
+				{0, 0, 0,   0, 0, 0,    0, 1, 0}
 		};
         Sudoku sudoku = new Sudoku(s);
         
         System.out.println("Processing this sudoku ...");
         
-        //for (int i = 0; i < 9; i++)
-		//	for (int j = 0; j < 9; j++)
-		//		sudoku.setCell(i, j, (i*3 + i/3 + j) % (9) + 1);
         sudoku.print();
         
         backtracking(sudoku);
@@ -37,15 +34,16 @@ public class SudokuMaker {
 
 		
 		if (!sk.hasZeros()) {
-			sk.print();
+			//sk.print();
 			nSolutions++;
-			return true;
+			return false;
 		} else { 
 		
 			int r = -1, c= -1;
-			boolean found = false;
+			
 			
 			for (r = 0 ; r < sk.ROWS; r++){
+				boolean found = false;
 				for ( c = 0; c < sk.COLS ; c++){
 					if (sk.emptyCell(r, c)){
 						found = true;
@@ -59,9 +57,10 @@ public class SudokuMaker {
 				
 				if (sk.looksPromising(r, c, n)){
 					sk.setCell(r, c, n);
+					//backtracking(sk);
 					
 					if ( backtracking(sk) ){
-						continue;//return true;
+						//continue;//return true;
 					}
 					else{
 						sk.setCell(r, c, 0);
